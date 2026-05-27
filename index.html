@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Eid Mubarak | Digital Eidi for a Dear Friend</title>
+    <!-- Google Fonts: Elegant + Modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 20%, #0a0c12, #010101);
+            color: #eeeef2;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a24;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c9a53b;
+            border-radius: 10px;
+        }
+
+        /* glassmorphism + container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        /* premium glass cards */
+        .glass-card {
+            background: rgba(15, 20, 30, 0.55);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(210, 180, 140, 0.25);
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease, border-color 0.2s;
+        }
+
+        .glass-card:hover {
+            border-color: rgba(210, 180, 140, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* typography */
+        h1, h2, h3 {
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFF8E7, #E4C580, #F7E5B3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+            margin-bottom: 0.5rem;
+        }
+
+        .gold-accent {
+            color: #e9c57e;
+        }
+
+        .subheading {
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: #cfd8e6;
+            letter-spacing: -0.2px;
+        }
+
+        /* floating moon + stars animation */
+        .moon-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .floating-moon {
+            font-size: 5rem;
+            filter: drop-shadow(0 0 12px rgba(255,215,0,0.5));
+            animation: floatMoon 6s ease-in-out infinite;
+        }
+        @keyframes floatMoon {
+            0% { transform: translateY(0px) rotate(0deg);}
+            50% { transform: translateY(-15px) rotate(3deg);}
+            100% { transform: translateY(0px) rotate(0deg);}
+        }
+        .star {
+            position: absolute;
+            color: #ffdf9c;
+            font-size: 1rem;
+            opacity: 0.8;
+            animation: twinkle 2.2s infinite alternate;
+        }
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8);}
+            100% { opacity: 1; transform: scale(1.2);}
+        }
+
+        /* particles canvas */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* sections relative to canvas */
+        .container, section, footer {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* memories cards grid */
+        .memories-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .memory-card {
+            background: rgba(10, 14, 23, 0.7);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            padding: 1.6rem 2rem;
+            width: 220px;
+            text-align: center;
+            border: 1px solid rgba(233, 197, 126, 0.3);
+            transition: all 0.25s;
+            cursor: default;
+        }
+        .memory-card i {
+            font-size: 2.4rem;
+            color: #e9c57e;
+            margin-bottom: 1rem;
+        }
+        .memory-card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+        .memory-card p {
+            font-size: 0.9rem;
+            color: #b9c2d4;
+        }
+
+        /* surprise button */
+        .surprise-btn {
+            background: linear-gradient(115deg, #1e2a3a, #0f1722);
+            border: 1px solid rgba(233, 197, 126, 0.7);
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-radius: 60px;
+            color: #f5e7c8;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(5px);
+        }
+        .surprise-btn:hover {
+            background: linear-gradient(115deg, #2a3a48, #1a2538);
+            border-color: #e9c57e;
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            color: #fff3df;
+        }
+
+        /* popup modal (premium) */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.3s;
+        }
+        .popup-card {
+            background: rgba(12, 18, 28, 0.95);
+            backdrop-filter: blur(16px);
+            border-radius: 2.5rem;
+            padding: 2rem 2.5rem;
+            text-align: center;
+            max-width: 400px;
+            border: 1px solid #e9c57e;
+            box-shadow: 0 40px 60px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+        .popup-card i {
+            font-size: 3.5rem;
+            color: #e9c57e;
+            margin-bottom: 1rem;
+        }
+        .popup-card p {
+            font-size: 1.4rem;
+            font-weight: 500;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: -0.2px;
+            color: #fcf3e0;
+        }
+        .close-popup {
+            margin-top: 1.8rem;
+            background: none;
+            border: 1px solid #e9c57e;
+            padding: 0.5rem 1.6rem;
+            border-radius: 40px;
+            color: #e9c57e;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-popup:hover {
+            background: #e9c57e22;
+        }
+
+        /* Quote styling */
+        .quote-text {
+            font-size: clamp(1.5rem, 5vw, 2.3rem);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            font-style: italic;
+            line-height: 1.4;
+            color: #f5edda;
+            border-left: 4px solid #e9c57e;
+            padding: 1rem 2rem;
+            background: rgba(0,0,0,0.25);
+            border-radius: 1.5rem;
+        }
+
+        /* Final section elegance */
+        .final-message {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 400;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            padding: 2.5rem;
+            border-radius: 3rem;
+            border: 1px solid rgba(233,197,126,0.3);
+        }
+
+        /* responsive */
+        @media (max-width: 760px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .memory-card {
+                width: 170px;
+                padding: 1rem 1rem;
+            }
+            .hero-title {
+                font-size: 3rem;
+            }
+            .subheading {
+                font-size: 1rem;
+            }
+            .surprise-btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* lantern glowing effect */
+        .lantern-glow {
+            position: relative;
+        }
+        hr {
+            border-color: rgba(233,197,126,0.2);
+            margin: 1rem 0;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #a7adc2;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<div class="container">
+    <!-- Hero Section with animated moon, stars, lantern vibe -->
+    <section id="hero">
+        <div class="moon-wrapper" style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: space-between;">
+            <div>
+                <div style="position: relative; display: inline-block;">
+                    <span class="floating-moon"><i class="fas fa-moon"></i></span>
+                    <span class="star" style="top: -15px; left: 35px;"><i class="fas fa-star"></i></span>
+                    <span class="star" style="top: 10px; left: -20px; animation-delay: 0.6s;"><i class="fas fa-star"></i></span>
+                    <span class="star" style="bottom: -10px; right: -15px; animation-delay: 1s;"><i class="fas fa-star"></i></span>
+                </div>
+                <h1 class="hero-title">Eid Mubarak 🌙✨</h1>
+                <p class="subheading">A small digital Eidi made specially for you.</p>
+            </div>
+            <div style="font-size: 3rem; opacity: 0.8;">
+                <i class="fas fa-lantern" style="color: #e9c57e; filter: drop-shadow(0 0 6px gold);"></i>
+                <i class="fas fa-star-of-life" style="font-size: 1.5rem; margin-left: 5px;"></i>
+            </div>
+        </div>
+        <div style="margin-top: 2rem; display: flex; gap: 12px; flex-wrap: wrap;">
+            <span style="background: rgba(233,197,126,0.15); border-radius: 50px; padding: 0.2rem 1rem; font-size: 0.8rem;"><i class="fas fa-crescent-moon"></i> Barakah</span>
+            <span style="background: rgba(233,197,126,0.15); border-radius: 50px; padding: 0.2rem 1rem; font-size: 0.8rem;"><i class="fas fa-sparkles"></i> Joy</span>
+            <span style="background: rgba(233,197,126,0.15); border-radius: 50px; padding: 0.2rem 1rem; font-size: 0.8rem;"><i class="fas fa-heart"></i> Friendship</span>
+        </div>
+    </section>
+
+    <!-- Friendship Message Section (heartfelt) -->
+    <section id="friendship-message">
+        <div class="glass-card" style="padding: 2rem 2rem;">
+            <i class="fas fa-hand-sparkles" style="font-size: 2.2rem; color: #e9c57e; margin-bottom: 1rem; display: inline-block;"></i>
+            <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">Dear friend,</h2>
+            <p style="font-size: 1.15rem; line-height: 1.5; color: #eef2ff; max-width: 90%;">
+                Some people walk into your life and leave a trail of laughter, late-night wisdom, and unwavering support. 
+                You are one of those rare gems. Through every memory, every silly moment and every heartfelt talk, 
+                you've made this journey brighter. On this blessed Eid, I just wanted to say: 
+                <span class="gold-accent">your presence is a gift.</span> Thank you for being you — no filters, no pretense, just real friendship.  
+                🌙 May our bond always shine like the crescent moon.
+            </p>
+        </div>
+    </section>
+
+    <!-- Memories / Moments Section with Cards -->
+    <section id="memories">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 2rem; letter-spacing: -0.3px;"><i class="fas fa-camera-retro"></i> Treasured moments</h2>
+            <p style="color: #cdd9f4;">the inside jokes & golden hours</p>
+        </div>
+        <div class="memories-grid">
+            <div class="memory-card"><i class="fas fa-comments"></i><h3>Best conversations</h3><p>Deep talks & endless laughter</p></div>
+            <div class="memory-card"><i class="fas fa-laugh-squint"></i><h3>Funniest memories</h3><p>Happiness echoes with you</p></div>
+            <div class="memory-card"><i class="fas fa-moon"></i><h3>Random late-night chats</h3><p>3am thoughts & soul talks</p></div>
+            <div class="memory-card"><i class="fas fa-peace"></i><h3>Good vibes only</h3><p>Light, warmth & understanding</p></div>
+        </div>
+    </section>
+
+    <!-- Interactive Surprise Button Section -->
+    <section id="surprise-section" style="text-align: center;">
+        <button id="eidiButton" class="surprise-btn">
+            <i class="fas fa-gift"></i> Open Your Eidi 🎁
+        </button>
+        <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.7;">click for a little heartfelt surprise ✨</p>
+    </section>
+
+    <!-- Quote Section (emotional friendship quote) -->
+    <section id="quote-section">
+        <div class="quote-text">
+            <i class="fas fa-quote-left" style="margin-right: 12px; color: #e9c57e;"></i> 
+            “True friendship isn’t about being inseparable, but knowing that nothing can separate the bond you share. 
+            Here’s to all the unsaid thank yous and the joy of having you in my life.” 
+            <i class="fas fa-quote-right" style="margin-left: 8px; vertical-align: top; color: #e9c57e;"></i>
+        </div>
+        <div style="margin-top: 1rem; text-align: right; font-style: normal; color: #bbaa7a;">— for you, always</div>
+    </section>
+
+    <!-- Final Section: Blessing -->
+    <section id="final-blessing">
+        <div class="final-message">
+            <i class="fas fa-calendar-alt" style="font-size: 2rem; color: #e9c57e; margin-right: 10px;"></i>
+            <span>May your Eid be filled with happiness, peace, and unforgettable moments ❤️</span>
+            <div style="margin-top: 20px;"><i class="fas fa-cloud-moon"></i> <i class="fas fa-spa"></i></div>
+        </div>
+    </section>
+    
+    <footer>
+        <i class="fas fa-crescent-moon"></i>  digital Eidi — with love & gratitude  <i class="fas fa-star"></i>
+    </footer>
+</div>
+
+<!-- Popup structure for Eidi -->
+<div id="eidiPopup" class="popup-overlay">
+    <div class="popup-card">
+        <i class="fas fa-envelope-open-text"></i>
+        <p>You’re appreciated more than you know 💫</p>
+        <button class="close-popup" id="closePopupBtn"><i class="fas fa-heart"></i> Thank you</button>
+    </div>
+</div>
+
+<script>
+    // smooth particle system: glowing stars / dust (elegant particles)
+    const canvas = document.getElementById('particles-canvas');
+    let ctx = canvas.getContext('2d');
+    let width, height;
+    let particlesArray = [];
+
+    function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        initParticles();
+    }
+
+    class Particle {
+        constructor(x, y, size, speedX, speedY, opacity, color) {
+            this.x = x;
+            this.y = y;
+            this.size = size;
+            this.speedX = speedX;
+            this.speedY = speedY;
+            this.opacity = opacity;
+            this.color = color;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x < 0) this.x = width;
+            if (this.x > width) this.x = 0;
+            if (this.y < 0) this.y = height;
+            if (this.y > height) this.y = 0;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${this.opacity})`;
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particlesArray = [];
+        let particleCount = Math.min(180, Math.floor(width * height / 7000));
+        for (let i = 0; i < particleCount; i++) {
+            let size = Math.random() * 2.5 + 0.5;
+            let x = Math.random() * width;
+            let y = Math.random() * height;
+            let speedX = (Math.random() - 0.5) * 0.4;
+            let speedY = (Math.random() - 0.5) * 0.3;
+            let opacity = Math.random() * 0.5 + 0.1;
+            // soft gold, white, pale blue palette
+            let colorChoice = Math.random();
+            let r, g, b;
+            if(colorChoice < 0.6) {
+                r = 255; g = 215 + Math.random()*40; b = 120 + Math.random()*60; // gold / white
+            } else if(colorChoice < 0.85) {
+                r = 200; g = 210; b = 245; // soft silver-lavender
+            } else {
+                r = 255; g = 245; b = 200;
+            }
+            let color = { r: Math.min(255, r), g: Math.min(255, g), b: Math.min(255, b) };
+            particlesArray.push(new Particle(x, y, size, speedX, speedY, opacity, color));
+        }
+    }
+
+    function animateParticles() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+        for (let p of particlesArray) {
+            p.update();
+            p.draw();
+        }
+        requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+    });
+
+    resizeCanvas();
+    animateParticles();
+
+    // Surprise button + popup logic
+    const eidiBtn = document.getElementById('eidiButton');
+    const popup = document.getElementById('eidiPopup');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+
+    function showPopup() {
+        popup.style.visibility = 'visible';
+        popup.style.opacity = '1';
+        // subtle pop animation
+        const card = document.querySelector('.popup-card');
+        if(card) card.style.transform = 'scale(1)';
+    }
+
+    function hidePopup() {
+        popup.style.visibility = 'hidden';
+        popup.style.opacity = '0';
+        const card = document.querySelector('.popup-card');
+        if(card) card.style.transform = 'scale(0.9)';
+    }
+
+    eidiBtn.addEventListener('click', () => {
+        showPopup();
+        // extra spark effect: can add little burst but just nice open
+    });
+
+    closePopupBtn.addEventListener('click', hidePopup);
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) hidePopup();
+    });
+
+    // add floating stars dynamic around hero using JS for extra (optional)
+    function addFloatingStars() {
+        const heroDiv = document.querySelector('.moon-wrapper');
+        if(!heroDiv) return;
+        const starPositions = [[-25, 20], [45, -10], [70, 30], [-50, 45], [30, -35], [90, -20]];
+        starPositions.forEach((pos, idx) => {
+            let starSpan = document.createElement('span');
+            starSpan.className = 'star';
+            starSpan.style.position = 'absolute';
+            starSpan.style.left = pos[0] + '%';
+            starSpan.style.top = pos[1] + '%';
+            starSpan.style.fontSize = (Math.random() * 12 + 8) + 'px';
+            starSpan.style.animationDelay = (idx * 0.3) + 's';
+            starSpan.innerHTML = '<i class="fas fa-star"></i>';
+            heroDiv.style.position = 'relative';
+            heroDiv.appendChild(starSpan);
+        });
+    }
+    addFloatingStars();
+
+    // Additional Lantern Glow micro
